@@ -83,3 +83,15 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 @keyframes winbounce{0%{transform:scale(.4);opacity:0}65%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
 @media (max-height:760px){main{padding-top:13px}.planet-stage{height:230px;min-height:220px;margin:5px auto}.card{padding:11px;margin:9px 0}.board{margin:8px auto}h1{font-size:30px}h2{font-size:23px}button{min-height:49px;padding:10px}}
 @media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Stage-aware narration and collectible planet memories. */
+.dormant-message{background:linear-gradient(140deg,#213745,#22343c);border-color:#4c6670}
+.dormant-message strong{color:#e4e1d0}
+.dormant-icon{display:grid;place-items:center;flex:0 0 61px;width:61px;height:61px;border:2px solid #718b86;border-radius:50%;font-size:46px;color:#a7bbb6;background:#1b2c39;line-height:1}
+.archive-entries{display:grid;gap:12px;margin:15px 0}
+.archive-entry{border:1px solid #667c78;border-radius:14px;padding:16px;background:linear-gradient(145deg,#2c4653,#1a303f);box-shadow:0 3px 0 #12202e}
+.archive-entry h3{font-size:16px;color:#f7d3a1;margin:0 0 7px}
+.archive-entry .archive-author{font-size:12px;color:#9ce6c5;font-weight:700}
+.archive-entry p{font-size:14px;color:#ebdec7;margin:8px 0 0}
+.archive-entry.archive-locked{opacity:.65;border-style:dashed}
+.archive-entry.archive-locked h3{color:#c5d7d1}
