@@ -24,17 +24,21 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 .stars{text-shadow:0 5px 20px #ffca7388;animation:winbounce .65s ease both}
 .planet-stage{height:min(76vw,365px);max-height:355px;min-height:245px;width:100%;margin:13px auto 18px;position:relative;isolation:isolate}
 .world-orbit{position:absolute;left:50%;top:47%;width:min(90%,360px);transform:translate(-50%,-50%);filter:drop-shadow(0 19px 15px #030e22a0)}
-.world-svg{display:block;width:100%;height:auto;overflow:visible;animation:floatplanet 5.2s ease-in-out infinite}
+.world-svg{display:block;width:100%;height:auto;overflow:visible;animation:none;transform:none}
 .space-dust{position:absolute;border:2px solid #a8d8b557;border-radius:50%;transform:rotate(-21deg);pointer-events:none;top:25%;left:7%;width:90%;height:50%}
 .dust-two{transform:rotate(24deg);top:20%;left:4%;width:94%;height:56%;border-color:#f7c48724}
 .ponko-friend{position:absolute;left:0;bottom:1%;z-index:3;width:clamp(90px,31%,130px);text-align:center;filter:drop-shadow(0 7px 8px #0c1c2a99)}
-.ponko-svg{width:100%;height:auto;overflow:visible;animation:ponkobob 5.6s ease-in-out infinite;transform-origin:50% 85%}
+.ponko-svg{width:100%;height:auto;overflow:visible;animation:none;transform:none}
 .ponko-tag{display:block;padding:3px 6px;border-radius:10px;background:#1c3447d9;color:#ffe7b7;font-weight:900;font-size:11px;white-space:nowrap}
 .ponko-friend.asleep{filter:grayscale(.4) drop-shadow(0 7px 8px #0c1c2a99)}
 .ponko-friend.asleep .ponko-svg{animation:none;opacity:.75}
-.ponko-eye{transform-origin:center;animation:blink 7.2s linear infinite}
-.ponko-ant{transform-origin:69px 30px;animation:antenna 10s ease-in-out infinite}
-.ponko-arm{transform-origin:25px 93px;animation:wave 12s ease-in-out infinite}
+.ponko-friend.asleep .ponko-arm{animation:none}
+.ponko-friend.asleep .ponko-eyes-open{animation:none;opacity:0}
+.ponko-friend.asleep .ponko-eyes-closed{animation:none;opacity:1}
+.ponko-eyes-open{opacity:1;animation:ponko-open-eyes 8.5s steps(1,end) infinite}
+.ponko-eyes-closed{opacity:0;animation:ponko-closed-eyes 8.5s steps(1,end) infinite}
+.ponko-ant{animation:none;transform:none}
+.ponko-arm{transform-box:view-box;transform-origin:25px 93px;animation:ponko-hello 12s ease-in-out infinite}
 .tree-sway{transform-origin:90px 167px;animation:tree 6s ease-in-out infinite}
 .lamp-on{filter:drop-shadow(0 0 11px #ffdf8a);animation:starglow 3s ease-in-out infinite}
 .growing{animation:growin .9s cubic-bezier(.2,1.4,.36,1) both}
@@ -58,22 +62,20 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 .mission-target .item-svg{width:36px;height:36px;flex:0 0 auto}
 .mission-target b{display:block;font-size:15px;color:#f4d49a}
 .result-ponko{max-width:110px;margin:6px auto 0}
-.result-ponko .ponko-svg{animation:ponkobob 5.6s ease-in-out infinite}
+.result-ponko .ponko-svg{animation:none}
 .title-logo{font-size:clamp(33px,9vw,51px);font-weight:1000;letter-spacing:.02em;color:#f8d8a5;line-height:1;text-align:center;text-shadow:0 3px #a77856,0 6px #6e5b55,0 9px 17px #071524}
 .logo-subtitle{text-align:center;color:#c6e5c9;letter-spacing:.22em;margin-top:7px;font-size:13px}
 .intro-line{text-align:center;font-size:14px;color:#d6d7ca;margin:8px}
 .story-panel{display:flex;gap:11px;align-items:center;background:#253f4edb;border:1px solid #54756f;border-radius:14px;padding:9px}
-.story-panel .ponko-svg{width:61px;flex:0 0 61px;animation:ponkobob 5.6s ease-in-out infinite}
+.story-panel .ponko-svg{width:61px;flex:0 0 61px;animation:none}
 .story-panel p{margin:0;font-size:12px;line-height:1.5}
 .story-panel strong{color:#f1d097}
 .choices button{border-color:#66868a;background:linear-gradient(#34576b,#213b4d);min-height:79px}
 .choices small{color:#b8d6c8;margin-top:3px}
 .tool-note{font-size:12px;color:#b8cdc8}
-@keyframes floatplanet{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-7px) rotate(1deg)}}
-@keyframes ponkobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-@keyframes wave{0%,35%,100%{transform:rotate(0)}55%{transform:rotate(-7deg)}75%{transform:rotate(0)}}
-@keyframes antenna{0%,40%,100%{transform:rotate(0)}65%{transform:rotate(3deg)}}
-@keyframes blink{0%,45%,47%,100%{transform:scaleY(1)}46%{transform:scaleY(.07)}}
+@keyframes ponko-hello{0%,66%,100%{transform:rotate(0deg)}74%{transform:rotate(-11deg)}82%{transform:rotate(0deg)}}
+@keyframes ponko-open-eyes{0%,85.9%,88.1%,100%{opacity:1}86%,88%{opacity:0}}
+@keyframes ponko-closed-eyes{0%,85.9%,88.1%,100%{opacity:0}86%,88%{opacity:1}}
 @keyframes tree{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(2deg)}}
 @keyframes growin{from{transform:scale(.25);opacity:.2}to{transform:scale(1);opacity:1}}
 @keyframes tileappear{from{transform:scale(.78) translateY(-5px);opacity:.58}to{transform:scale(1);opacity:1}}
