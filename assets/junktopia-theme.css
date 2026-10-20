@@ -109,3 +109,16 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 .mission-target.delivered{animation:mission-delivered .3s ease-out}
 @keyframes mission-delivered{0%{background:#c4e6a1;color:#12362b;box-shadow:0 0 0 5px #a1dca5a0}100%{background:#172d3a;box-shadow:none}}
 @media(prefers-reduced-motion:reduce){.motion-ghost,.delivery-flight{display:none}.merge-flash{animation:none!important}.mission-target.delivered{animation:none!important;background:#9adcc2;color:#17382f;box-shadow:0 0 0 5px #c4f2c8}}
+
+
+/* Four milestones, not five flags: streetlamp OR flower is a single valid choice. */
+.repair-progress{display:grid;gap:7px;margin-top:11px}
+.repair-progress-step{display:flex;gap:9px;align-items:center;padding:8px 9px;background:#152b39;border:1px solid #536f6e;border-radius:10px;font-size:12px;min-width:0}
+.repair-progress-step.is-done{border-color:#83c6a7;background:#24473e}
+.repair-step-icon{width:26px;height:26px;display:grid;place-items:center;flex:0 0 26px;border-radius:50%;border:1px solid #768d89;color:#d0d8d0;font-weight:900}
+.is-done .repair-step-icon{background:#a8dec0;color:#1c5546;border-color:#baf6db}
+.repair-progress-step span:nth-child(2){flex:1;min-width:0}
+.repair-progress-step b{display:block;color:#ffdbb0;line-height:1.2}
+.repair-progress-step small{display:block;color:#bdcfc6;line-height:1.5}
+.repair-step-status{font-size:10px;font-weight:700;color:#a8d8bc;white-space:nowrap}
+.is-pending .repair-step-status{color:#a6b9bc}
