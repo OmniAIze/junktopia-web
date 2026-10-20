@@ -45,7 +45,7 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 .glow{filter:drop-shadow(0 0 13px #99fae0);animation:starglow 3s infinite alternate}
 .building{filter:drop-shadow(0 4px 2px #27373d99)}
 /* Touch area stays as the original 5x5 grid. */
-.board{position:relative;padding:9px;gap:5px;background:linear-gradient(140deg,#766550,#3c4c54);border:4px solid #aa8970;border-radius:18px;box-shadow:0 6px 0 #1c2530,0 14px 28px #030e20a0,inset 0 3px 9px #17293a;max-width:465px;width:100%;height:auto;min-height:0;aspect-ratio:1/1;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));grid-auto-rows:minmax(0,1fr)}
+.board{position:relative;padding:9px;gap:5px;background:linear-gradient(140deg,#766550,#3c4c54);border:4px solid #aa8970;border-radius:18px;box-shadow:0 6px 0 #1c2530,0 14px 28px #030e20a0,inset 0 3px 9px #17293a;max-width:465px;width:100%;height:min(465px,calc(100vw - 40px));min-height:0;aspect-ratio:1/1;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(5,minmax(0,1fr));grid-auto-rows:minmax(0,1fr)}
 .tile{position:relative;min-width:0;min-height:0;overflow:hidden;background:linear-gradient(145deg,#314a59,#1c3547);border:1px solid #6b7d79;border-radius:9px;box-shadow:inset 0 2px 4px #0a1a2c44}
 .tile.filled{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,#e9dac0,#a7a58e);border:2px solid #eddab6;box-shadow:0 3px #5a625a,inset 0 2px 5px #fff8da88;color:#47515b;animation:tileappear .19s cubic-bezier(.18,.9,.3,1.2)}
 .tile.wood{background:linear-gradient(145deg,#cce0b8,#9aa886);border-color:#cce2b4}
@@ -98,12 +98,14 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 
 /* V0.4: swipe animation ghosts; board keeps the original 5x5 fixed geometry. */
 .motion-layer{position:absolute;inset:0;pointer-events:none;z-index:15;overflow:visible}
-.motion-ghost{position:absolute;display:flex;align-items:center;justify-content:center;pointer-events:none;will-change:transform,opacity}
+.motion-ghost{position:absolute;display:flex;align-items:center;justify-content:center;pointer-events:none;will-change:transform,opacity;box-sizing:border-box;border:2px solid #ffe0af;border-radius:10px;box-shadow:0 3px 9px #071b2aa8,inset 0 1px 5px #fff3d48e;background:linear-gradient(145deg,#e9dac0,#a7a58e)}
+.motion-ghost.motion-wood{background:linear-gradient(145deg,#cce0b8,#9aa886);border-color:#dcf0ba}
 .motion-ghost .item-svg{width:min(88%,59px);height:auto;max-height:78%;filter:drop-shadow(0 3px 4px #0a203733)}
 .board.motion-active .tile .item-svg,.board.motion-active .tile small{visibility:hidden}
-.merge-flash{position:absolute;z-index:19;pointer-events:none;width:62px;height:62px;border:4px solid #ffe7a6;border-radius:50%;box-shadow:0 0 22px 8px #ffd18999,inset 0 0 20px #fff8d4c0}
+.merge-flash{position:absolute;z-index:19;pointer-events:none;width:68px;height:68px;border:5px solid #fff4be;border-radius:50%;background:radial-gradient(circle,#fff3bc77 0,#ffdc8855 42%,transparent 75%);box-shadow:0 0 26px 13px #ffd189c4,inset 0 0 22px #fff8e9}
+.merge-flash-static{opacity:1;transform:translate(-50%,-50%) scale(1.2);background:#ffe6a38a;box-shadow:0 0 0 8px #f4d19c88,0 0 26px 15px #ffce76c4}
 .delivery-flight{position:fixed;z-index:200;display:grid;place-items:center;width:54px;height:54px;pointer-events:none;filter:drop-shadow(0 0 12px #f8cf8dbb);will-change:transform,opacity}
 .delivery-flight .item-svg{width:100%;max-height:none}
 .mission-target.delivered{animation:mission-delivered .3s ease-out}
 @keyframes mission-delivered{0%{background:#c4e6a1;color:#12362b;box-shadow:0 0 0 5px #a1dca5a0}100%{background:#172d3a;box-shadow:none}}
-@media(prefers-reduced-motion:reduce){.motion-ghost,.delivery-flight,.merge-flash{display:none}}
+@media(prefers-reduced-motion:reduce){.motion-ghost,.delivery-flight{display:none}.merge-flash{animation:none!important}.mission-target.delivered{animation:none!important;background:#9adcc2;color:#17382f;box-shadow:0 0 0 5px #c4f2c8}}
