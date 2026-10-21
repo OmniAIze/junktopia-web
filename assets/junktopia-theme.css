@@ -127,3 +127,110 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 .chapter-banner{padding:13px 14px;margin:12px 0;border:1px solid #7aa596;border-radius:13px;background:linear-gradient(125deg,#274d53,#1b3547);box-shadow:inset 0 1px #ccdec05e}
 .chapter-banner strong{display:block;color:#f9d8a1;font-size:15px;margin:0 0 4px}
 .chapter-banner p{font-size:12px;line-height:1.65;color:#d1e5d6;margin:0}
+
+/* V0.7: final-state tiles may exist in DOM, but they are never painted early.
+   This is critical: without this rule the player sees tiles already at their
+   destination behind the moving ghosts, making swipes appear instantaneous. */
+.board.motion-active .tile.filled{
+  animation:none!important;
+  border:1px solid #6b7d79!important;
+  background:linear-gradient(145deg,#213e4d,#132c3b)!important;
+  box-shadow:inset 0 2px 4px #0a1a2c44!important;
+}
+.board.motion-active .tile.filled .item-svg,
+.board.motion-active .tile.filled small{visibility:hidden!important}
+.board.motion-active .motion-ghost{z-index:3;opacity:1}
+.motion-layer{isolation:isolate}
+.motion-ghost{backface-visibility:hidden;transform-origin:top left}
+.motion-ghost .item-svg{visibility:visible!important;opacity:1!important}
+/* JS chooses whether reduced-motion drawing is necessary. A player explicitly
+   opting in to full motion is not suppressed by the OS-level CSS rules. */
+@media(prefers-reduced-motion:reduce){
+  .motion-ghost,.delivery-flight{display:flex!important}
+  .motion-layer{display:block!important}
+}
+
+/* V0.7 art direction: repaired brass, deep-space glass, book-like UI typography.
+   Less primary-colored toy UI; more tangible engraved miniature components. */
+:root{--space-deep:#081624;--space-mid:#12293b;--brass:#ebc48d;--chalk:#f3e5ce;--accent-copper:#cf936a;--sea-glass:#9cd1c4}
+body{background:#06111d;font-family:ui-rounded,-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;-webkit-font-smoothing:antialiased;letter-spacing:.005em}
+main{
+  max-width:520px;
+  background:
+    radial-gradient(ellipse at 54% 7%,#4764794a,transparent 38%),
+    radial-gradient(ellipse at 10% 55%,#3f625244,transparent 52%),
+    radial-gradient(ellipse at 100% 93%,#6a493b22,transparent 50%),
+    linear-gradient(178deg,#15293b 0%,#0b1d2d 50%,#081725 100%);
+  box-shadow:0 0 0 1px #66878b20,0 0 100px #020a16;
+  padding:23px 19px max(32px,env(safe-area-inset-bottom));
+}
+main:before{opacity:.58;animation:none;background-size:340px 430px}
+h1,h2{color:#f7e9ce;text-wrap:balance;text-shadow:0 2px 10px #020d1933}
+h2{font-size:clamp(23px,5.7vw,27px);font-weight:800;line-height:1.3;margin:5px 0 12px;letter-spacing:-.022em}
+.stage-kicker{color:#acd4c8;font-size:11px;font-weight:900;letter-spacing:.14em;margin:12px 0 4px}
+.title-logo{letter-spacing:.1em;font-weight:900;font-size:clamp(30px,8vw,46px);text-shadow:0 2px #6c4c40,0 5px 18px #020d1988}
+.logo-subtitle{font-weight:800;color:#dcead6;letter-spacing:.28em;margin:5px 0 8px}
+.intro-line{font-size:13px;color:#d6e0d7;line-height:1.6;margin:8px 0}
+.card{
+  background:linear-gradient(155deg,#284153 0%,#1a3143 50%,#162a3a 100%);
+  border:1px solid #90b1ac51;border-radius:17px;
+  box-shadow:0 11px 23px #03101e4d,inset 0 1px 0 #f3deb92b;
+  padding:16px;
+  margin:14px 0;
+}
+.mission-card{border-top:3px solid #cda36e;background:linear-gradient(165deg,#293d4b,#172c3b)}
+.mission-eyebrow{display:block;font-size:10px;font-weight:900;letter-spacing:.16em;color:#e7bd8a}
+.mission-targets{gap:8px;margin-top:11px}
+.mission-target{background:linear-gradient(145deg,#213847,#172b38);border:1px solid #708d8b7d;border-radius:12px;min-width:124px;padding:10px 9px;box-shadow:inset 0 1px #e5edd41a;color:#ecdfc8}
+.mission-target .item-svg{height:42px;width:42px;filter:drop-shadow(0 3px 4px #07192773)}
+.mission-target b{font-size:20px;letter-spacing:.025em;color:#f7d6a0}
+.run-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 8px}
+.run-stat{display:flex;justify-content:space-between;align-items:center;gap:5px;border:1px solid #68817d86;background:#172b3b;border-radius:10px;padding:9px 10px;box-shadow:inset 0 1px #bccabb20}
+.run-stat small{color:#a7c9bb;letter-spacing:.13em;font-size:9px;font-weight:800}
+.run-stat strong{font-size:19px;color:#f6d9ac;font-weight:900;font-variant-numeric:tabular-nums}
+.board{
+  border:5px solid #97856f;border-radius:17px;padding:8px;gap:5px;
+  background:linear-gradient(148deg,#514b45,#37474b 38%,#273c46);
+  box-shadow:0 3px 0 #3d3836,0 9px 0 #111f27,0 21px 38px #020d1b99,
+    inset 0 3px 8px #11222aaf,inset 0 0 0 1px #ecdbac48;
+}
+.tile{
+  border-radius:9px;
+  background:linear-gradient(145deg,#213e4d,#132c3b);
+  border:1px solid #53716dba;
+  box-shadow:inset 0 3px 6px #04172488,inset 0 1px #a5b3ad18;
+}
+.tile.filled{
+  background:linear-gradient(150deg,#fff3d7 0%,#dfc9a4 53%,#baab92 100%);
+  border:2px solid #ead0a1;
+  color:#2d3e45;
+  box-shadow:inset 0 2px 3px #fff9e7b4,0 3px 4px #071a286b;
+}
+.tile.wood{background:linear-gradient(145deg,#e5e7bd,#afc699 65%,#8fa787);border-color:#d8e4b2}
+.tile small{font-size:9px;letter-spacing:.035em;color:#374e4b}
+.item-svg{width:min(94%,65px);max-height:74%;filter:drop-shadow(0 3px 3px #263e4766)}
+.queue-item{width:48px;height:48px;border-radius:10px;background:linear-gradient(140deg,#e2d8b9,#a5b9a8);border-color:#c4d3b2;box-shadow:inset 0 1px #fff4dcaa,0 3px #172d32}
+.queue-item .item-svg{width:41px}
+button{
+  border:1px solid #f2c28e;border-bottom:4px solid #946a51;
+  background:linear-gradient(155deg,#f8d6a2 0%,#e5ae75 95%);
+  border-radius:13px;
+  box-shadow:0 7px 15px #05152260,inset 0 1px #fff7ddb0;
+  color:#43382c;text-shadow:none;font-size:15px;letter-spacing:.02em;
+  min-height:53px;
+}
+button.alt{background:linear-gradient(150deg,#355465,#243d50);border-color:#66858a;border-bottom-color:#183041;color:#eee4d1;box-shadow:inset 0 1px #c2e4da31,0 5px 12px #05152240}
+button:focus-visible{outline:3px solid #9cebcf;outline-offset:3px}
+.planet-stage{background:radial-gradient(ellipse at 50% 53%,#c7d99f24,transparent 45%);margin:14px auto 19px}
+.world-orbit{filter:drop-shadow(0 22px 14px #010b19c4)}
+.story-panel{background:linear-gradient(120deg,#2c4954b0,#1a3442);border:1px solid #74928870;border-radius:14px;box-shadow:inset 0 1px #ffdbac2a;padding:13px}
+.story-panel p{font-size:12px;color:#e6dac8}
+.story-panel strong{color:#ffe0ae}
+.meter{border-radius:10px;height:9px}
+.meter>div{background:linear-gradient(90deg,#75bca9,#c8e2a6)}
+.chapter-banner{background:linear-gradient(120deg,#334f52,#213c46);border:1px solid #99a99473;box-shadow:inset 3px 0 #bf9d70}
+.rank-result{text-align:center;margin-bottom:16px}
+.rank-result>small{display:block;font-size:11px;color:#b4cec1;letter-spacing:.11em;font-weight:800}
+.rank-result .stars{margin:6px auto;color:#f9d18c;font-size:45px;letter-spacing:.1em;text-shadow:0 2px #946a4a,0 6px 14px #f0be6566}
+.stars-muted{color:#62777a;text-shadow:none}
+@media(max-width:355px){.run-stat{padding:7px}.run-stat small{font-size:8px}.run-stat strong{font-size:17px}.mission-target{padding:7px 6px;min-width:110px}}
