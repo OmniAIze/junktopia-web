@@ -122,3 +122,8 @@ button:focus-visible{outline:3px solid #b0f5d1;outline-offset:2px}
 .repair-progress-step small{display:block;color:#bdcfc6;line-height:1.5}
 .repair-step-status{font-size:10px;font-weight:700;color:#a8d8bc;white-space:nowrap}
 .is-pending .repair-step-status{color:#a6b9bc}
+
+/* Chapter two: narration sits beneath the planet and never blocks board controls. */
+.chapter-banner{padding:13px 14px;margin:12px 0;border:1px solid #7aa596;border-radius:13px;background:linear-gradient(125deg,#274d53,#1b3547);box-shadow:inset 0 1px #ccdec05e}
+.chapter-banner strong{display:block;color:#f9d8a1;font-size:15px;margin:0 0 4px}
+.chapter-banner p{font-size:12px;line-height:1.65;color:#d1e5d6;margin:0}
