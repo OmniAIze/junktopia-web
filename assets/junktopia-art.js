@@ -8,7 +8,13 @@
   function itemSVG(a){
     if(!a)return '';
     const k=a.k,l=a.l;
-    const label=k==='m'?['空き缶','鉄くず','歯車','動力部品'][l-1]:['小枝','板材','木枠','建築部品'][l-1];
+    const itemNames={
+      m:['空き缶','鉄くず','歯車','動力部品'],
+      w:['小枝','板材','木枠','建築部品'],
+      e:['切れた導線','回路片','制御基板','エネルギーコア'],
+      g:['ガラス片','窓ガラス','光学レンズ','星見望遠鏡']
+    };
+    const label=itemNames[k]?.[l-1]||'未知の部品';
     let core='';
     if(k==='m'&&l===1)core=`<ellipse cx="32" cy="14" rx="14" ry="6" fill="#9dd5d4" stroke="#537a86" stroke-width="2"/><path d="M18 14 L17 49 Q31 57 46 48 L46 14" fill="#e8c390" stroke="#6d7c77" stroke-width="2.5"/><path d="M18 25 Q31 30 46 25 L46 40 Q32 46 17 38Z" fill="#d26f51"/><path d="M24 30 L37 25 M26 39 L39 34" stroke="#ffdfac" stroke-width="2.5"/><ellipse cx="32" cy="48" rx="15" ry="5" fill="#c69c77" stroke="#6d7c77" stroke-width="2"/>`;
     if(k==='m'&&l===2)core=`<path d="M11 43 L23 19 L37 28 L53 14 L56 37 L38 52 Z" fill="#859ba4" stroke="#43555e" stroke-width="3"/><path d="M19 33L44 44M29 19L47 32" stroke="#d5e3e2" stroke-width="3"/><circle cx="19" cy="43" r="6" fill="#e2a15f" stroke="#704a36" stroke-width="3"/><circle cx="47" cy="23" r="5" fill="#cda786" stroke="#704a36" stroke-width="2"/>`;
@@ -18,6 +24,17 @@
     if(k==='w'&&l===2)core=`<g transform="rotate(-12 32 32)"><rect x="10" y="14" width="17" height="42" rx="3" fill="#b78454" stroke="#73593d" stroke-width="2"/><rect x="29" y="10" width="18" height="43" rx="3" fill="#d2a16a" stroke="#73593d" stroke-width="2"/><circle cx="19" cy="20" r="2" fill="#514839"/><circle cx="38" cy="46" r="2" fill="#514839"/></g>`;
     if(k==='w'&&l===3)core=`<rect x="12" y="11" width="40" height="43" rx="4" fill="#b87b4e" stroke="#785338" stroke-width="3"/><rect x="23" y="21" width="18" height="22" fill="#354b52" stroke="#e6b878" stroke-width="3"/><path d="M13 14 L52 54 M51 12 L13 53" stroke="#e7b980" stroke-width="4"/><circle cx="16" cy="16" r="2" fill="#fce0a0"/>`;
     if(k==='w'&&l===4)core=`<path d="M8 30 L32 10 L56 30 V55 H8 Z" fill="#d2a06d" stroke="#755640" stroke-width="3"/><path d="M6 30L32 8L58 30" fill="none" stroke="#9d6747" stroke-width="8" stroke-linejoin="round"/><rect x="26" y="34" width="15" height="21" fill="#577278"/><path d="M12 46H25M43 46H53" stroke="#f6d2a2" stroke-width="3"/>`;
+
+    // Electronics, four readable silhouettes: wire => board fragment => control PCB => energy core.
+    if(k==='e'&&l===1)core=`<path d="M12 44C11 24 28 14 38 26C45 34 28 41 35 52" fill="none" stroke="#bc754f" stroke-width="7" stroke-linecap="round"/><path d="M12 44C11 24 28 14 38 26C45 34 28 41 35 52" fill="none" stroke="#ffe3aa" stroke-width="3" stroke-linecap="round"/><path d="M35 50L37 58 M10 43L4 46" stroke="#b8dad1" stroke-width="5" stroke-linecap="round"/><rect x="37" y="11" width="15" height="10" rx="3" fill="#73c3ba" stroke="#376a79" stroke-width="2"/><circle cx="49" cy="16" r="2" fill="#ffefb4"/>`;
+    if(k==='e'&&l===2)core=`<g transform="rotate(-12 32 32)"><rect x="13" y="17" width="39" height="33" rx="5" fill="#247b76" stroke="#265564" stroke-width="3"/><path d="M19 25H30V32H42M22 42H31V35H48" stroke="#b8e9cb" stroke-width="3" fill="none"/><rect x="30" y="24" width="13" height="13" rx="3" fill="#233c4e" stroke="#d7b77a" stroke-width="2"/><circle cx="21" cy="25" r="3" fill="#f4d18c"/><circle cx="23" cy="42" r="3" fill="#f4d18c"/></g>`;
+    if(k==='e'&&l===3)core=`<rect x="10" y="11" width="44" height="43" rx="6" fill="#287e78" stroke="#174f61" stroke-width="3"/><rect x="22" y="19" width="23" height="24" rx="4" fill="#263c54" stroke="#f0d6a3" stroke-width="3"/><path d="M16 22H23M15 33H22M16 44H23M44 25H50M44 36H51M34 43V52" stroke="#a3e1d0" stroke-width="2.7"/><circle cx="34" cy="30" r="6" fill="#71e1d1"/><circle cx="35" cy="28" r="2" fill="#e9ffdc"/><g fill="#e6af70"><circle cx="15" cy="17" r="2.5"/><circle cx="48" cy="49" r="2.5"/></g>`;
+    if(k==='e'&&l===4)core=`<path d="M15 17L32 8L50 18V44L32 55L14 44Z" fill="#31566b" stroke="#d6b482" stroke-width="3.5"/><path d="M21 19L32 14L44 21V40L32 48L21 41Z" fill="#237e82" stroke="#b8ebc2" stroke-width="2"/><circle cx="32" cy="31" r="14" fill="#b5f2db" opacity=".42"/><circle cx="32" cy="31" r="8" fill="#ecffcf" stroke="#b7e8e2" stroke-width="3"/><path d="M8 30H15M50 30H58M32 3V10M32 53V61" stroke="#d6ae72" stroke-width="4" stroke-linecap="round"/><circle cx="29" cy="27" r="3" fill="white"/>`;
+    // Glass/optics progression: shard => pane => lens => telescope.
+    if(k==='g'&&l===1)core=`<path d="M9 44L23 10L38 42Z" fill="#8cd6df" stroke="#52869a" stroke-width="3" stroke-linejoin="round"/><path d="M30 52L39 19L57 51Z" fill="#b2e0ef" stroke="#5b8599" stroke-width="3" stroke-linejoin="round"/><path d="M23 14L20 37M42 28L39 45" stroke="#e7feff" stroke-width="3" stroke-linecap="round"/><circle cx="25" cy="49" r="3" fill="#e6c0a6"/>`;
+    if(k==='g'&&l===2)core=`<g transform="rotate(-9 32 32)"><rect x="15" y="11" width="37" height="44" rx="5" fill="#8dd6e0" stroke="#8c776c" stroke-width="5"/><path d="M22 17L22 47M28 16L19 37M34 13L47 28" fill="none" stroke="#f2ffef" stroke-width="3" opacity=".8"/><path d="M16 46H50" stroke="#536c7d" stroke-width="3"/></g>`;
+    if(k==='g'&&l===3)core=`<circle cx="30" cy="28" r="22" fill="#5d788b" stroke="#e0af7d" stroke-width="4"/><circle cx="30" cy="28" r="16" fill="#73c8dd" stroke="#f6e4c4" stroke-width="3"/><circle cx="30" cy="28" r="10" fill="#c2edf0" opacity=".8"/><path d="M40 12Q27 14 18 31" stroke="#f4ffff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M44 43L56 54" stroke="#91624a" stroke-width="9" stroke-linecap="round"/><path d="M44 43L56 54" stroke="#eac48a" stroke-width="4" stroke-linecap="round"/>`;
+    if(k==='g'&&l===4)core=`<g transform="rotate(-22 32 29)"><path d="M8 22L49 19L57 38L16 42Z" fill="#7899a3" stroke="#596b73" stroke-width="3"/><path d="M17 22L22 41" stroke="#d5b787" stroke-width="6"/><rect x="40" y="18" width="10" height="22" rx="3" fill="#cfad7b" stroke="#886d64" stroke-width="2"/><ellipse cx="55" cy="29" rx="6" ry="10" fill="#b4e8ed" stroke="#e4c394" stroke-width="3"/></g><path d="M28 43L21 56M28 43L37 56M28 43V56" stroke="#e4c090" stroke-width="5" stroke-linecap="round"/><circle cx="29" cy="42" r="5" fill="#d6a978" stroke="#6a5e60" stroke-width="2"/><path d="M12 12L16 12M14 10V14" stroke="#fff3cd" stroke-width="2"/>`;
     return `<svg class="item-svg item-${safe(k)}" role="img" aria-label="${safe(label)}" viewBox="0 0 64 64"><ellipse cx="33" cy="56" rx="21" ry="5" fill="#1e343a" opacity=".22"/>${core}</svg>`;
   }
   function ponko(){
