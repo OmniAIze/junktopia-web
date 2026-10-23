@@ -234,3 +234,32 @@ button:focus-visible{outline:3px solid #9cebcf;outline-offset:3px}
 .rank-result .stars{margin:6px auto;color:#f9d18c;font-size:45px;letter-spacing:.1em;text-shadow:0 2px #946a4a,0 6px 14px #f0be6566}
 .stars-muted{color:#62777a;text-shadow:none}
 @media(max-width:355px){.run-stat{padding:7px}.run-stat small{font-size:8px}.run-stat strong{font-size:17px}.mission-target{padding:7px 6px;min-width:110px}}
+
+/* V0.8: four clearly distinguishable, collectible salvage families. */
+.tile.electronic{background:linear-gradient(145deg,#cbefe2,#83c0af 66%,#5e9699);border-color:#9df2d3}
+.tile.glass{background:linear-gradient(145deg,#d6eef8,#a3cadd 65%,#8baec4);border-color:#d3eeef}
+.queue-item.queue-e{background:linear-gradient(145deg,#c2edda,#83bfb0);border-color:#a4e8c7}
+.queue-item.queue-g{background:linear-gradient(145deg,#d7f2fa,#9cbed6);border-color:#d6edfd}
+.motion-ghost.motion-electronic{background:linear-gradient(145deg,#cbefe2,#83c0af 66%,#5e9699);border-color:#9df2d3}
+.motion-ghost.motion-glass{background:linear-gradient(145deg,#d6eef8,#a3cadd 65%,#8baec4);border-color:#d3eeef}
+/* Distinct borders help identify materials even at small iPhone widths. */
+.catalog-group{margin:20px 0 23px}
+.catalog-heading{margin:0 0 9px}
+.catalog-heading h2{font-size:20px;margin:0 0 3px}
+.catalog-heading p{margin:0;color:#a9c8be;font-size:12px}
+.catalog-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.catalog-item{
+ display:flex;align-items:center;flex-direction:column;min-width:0;
+ border:1px solid #829c9480;border-radius:14px;padding:12px 7px 11px;
+ background:linear-gradient(154deg,#2a4553,#1a3041);
+ box-shadow:inset 0 1px #f1e7cc35,0 5px 10px #020b1a52;
+}
+.catalog-item .item-svg{width:82px;max-height:82px;height:82px;margin-bottom:3px}
+.catalog-item strong{font-size:13px;color:#f8e4c2;margin:3px 0 4px;white-space:normal;text-align:center}
+.catalog-item small{font-size:10px;color:#bdd3c8;text-align:center}
+.catalog-level{font-size:10px;font-weight:900;color:#d6b58a;letter-spacing:.08em}
+.catalog-item.catalog-e{border-color:#74c5ba99}
+.catalog-item.catalog-g{border-color:#9ebfe8aa}
+.catalog-item.catalog-w{border-color:#d4c08f88}
+.catalog-item.catalog-m{border-color:#c98f797c}
+@media(min-width:450px){.catalog-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.catalog-item .item-svg{width:68px;height:68px}}
