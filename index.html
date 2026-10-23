@@ -1,6 +1,6 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#101d33"><title>Junktopia | ガラクタ惑星</title><style>
 :root{font-family:system-ui,-apple-system,sans-serif;color:#f5fbff;background:#081727}*{box-sizing:border-box}body{margin:0;user-select:none;-webkit-user-select:none}main{max-width:520px;min-height:100dvh;margin:auto;padding:22px 18px max(20px,env(safe-area-inset-bottom));background:radial-gradient(circle at 80% 15%,#29536c 0,transparent 34%),#102239}h1{font-size:35px;margin:8px 0}h2{font-size:24px;margin:12px 0}p{line-height:1.6;color:#bcd1e1}.ey{color:#85e0ba;letter-spacing:.18em;font-size:13px;font-weight:bold}.card{border-radius:16px;background:#203851;border:1px solid #34566b;padding:16px;margin:14px 0}.row{display:flex;align-items:center;justify-content:space-between;gap:8px}.muted{color:#b8cddc;font-size:13px}button{display:block;width:100%;border:0;border-radius:13px;padding:14px 12px;margin:9px 0;background:#83e0ba;color:#133343;font-size:17px;font-weight:800;min-height:49px;touch-action:manipulation}button.alt{background:#304d66;color:white}button:disabled{opacity:.4}.planet{width:min(71vw,280px);height:min(71vw,280px);border-radius:50%;margin:30px auto;position:relative;background:radial-gradient(circle at 29% 27%,#829e8c,#39637a 64%,#1b364c);box-shadow:0 0 0 14px #65d6a40b,0 0 55px #63caba40;display:grid;place-items:center;font-size:50px}.planet .piece{position:absolute;font-size:35px;filter:drop-shadow(0 3px 2px #092333);}.planet .robot{top:27%;left:23%}.planet .work{top:53%;right:16%}.planet .flower{bottom:12%;left:25%}.planet .lamp{top:9%;right:21%}.planet .beacon{top:7%;left:44%}.meter{height:9px;border-radius:10px;background:#36546b;overflow:hidden}.meter>div{background:#83e0ba;height:100%}.board{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;touch-action:none;background:#142a40;border:2px solid #446078;border-radius:14px;padding:7px;aspect-ratio:1;width:100%;margin:14px auto}.tile{background:#2b4359;border-radius:8px;display:grid;place-items:center;text-align:center;min-width:0;overflow:hidden}.tile.filled{background:#eda76b;color:#253142}.tile.wood{background:#88d1a2}.tile b{font-size:clamp(11px,3.2vw,16px)}.tile small{font-size:10px}.pill{border-radius:9px;background:#2e5068;padding:9px}.score{font-weight:800;color:#f9d588}.choices button{text-align:left;background:#2e5068;color:#fff}.choices small{display:block;font-weight:400;margin-top:6px}.footer{margin-top:22px;text-align:center;color:#86a7b9;font-size:12px}.stars{font-size:38px;color:#ffd17b;text-align:center}.safe{padding-bottom:env(safe-area-inset-bottom)}
-</style><link rel="stylesheet" href="assets/junktopia-theme.css?v=11"></head><body><main id="app"><p>JavaScriptを有効にしたブラウザで開いてください。</p></main><script src="assets/junktopia-art.js?v=04"></script><script src="assets/junktopia-lore.js?v=02"></script><script src="assets/junktopia-motion.js?v=03"></script><script src="assets/junktopia-core.js?v=02"></script><script>
+</style><link rel="stylesheet" href="assets/junktopia-theme.css?v=12"></head><body><main id="app"><p>JavaScriptを有効にしたブラウザで開いてください。</p></main><script src="assets/junktopia-art.js?v=05"></script><script src="assets/junktopia-lore.js?v=02"></script><script src="assets/junktopia-motion.js?v=04"></script><script src="assets/junktopia-core.js?v=02"></script><script>
 'use strict';
 const cfg=[
 null,
@@ -9,35 +9,55 @@ null,
 {title:'星に彩りを',need:{'m3':1,'w3':1},kinds:['m','w'],n:4},
 {title:'もうひとつの願い',need:{'w3':2},kinds:['w','w','w','m'],n:4},
 {title:'小さな夜明け',need:{'m4':1},kinds:['m','m','m','w'],n:4},
-{title:'遠い倉庫の修理',need:{'m3':2,'w3':1},kinds:['m','w'],n:4},
-{title:'橋の足場をつくろう',need:{'w3':3},kinds:['w','w','m'],n:4},
-{title:'端末に電気を送ろう',need:{'m3':2,'w3':2},kinds:['m','m','w'],n:4},
+{title:'遠い倉庫の修理',need:{'e2':2,'m3':1},kinds:['e','e','m','m'],n:4},
+{title:'橋の足場をつくろう',need:{'w3':2,'e2':2},kinds:['w','w','e','e'],n:4},
+{title:'端末に電気を送ろう',need:{'e3':1,'m3':1},kinds:['e','e','m','m'],n:4},
 {title:'古い道具を組み立てよう',need:{'w4':1,'w3':1},kinds:['w','w','m'],n:4},
-{title:'遠くの信号をひろおう',need:{'m4':1,'w3':2},kinds:['m','m','w'],n:5},
-{title:'森の作業台をつくろう',need:{'w3':3,'m3':1},kinds:['w','w','m'],n:5},
-{title:'コイルの予備電源',need:{'m4':1,'m3':1},kinds:['m','m','w'],n:5},
-{title:'フロラの栽培箱',need:{'w4':1,'w3':2},kinds:['w','w','m'],n:5},
-{title:'修理船の装甲',need:{'m4':1,'m3':3},kinds:['m','m','w'],n:5},
-{title:'空の航路をつなごう',need:{'m4':1,'w4':1,'m3':1},kinds:['m','w'],n:5}
+{title:'遠くの信号をひろおう',need:{'m4':1,'e3':1},kinds:['m','m','e','e'],n:5},
+{title:'割れた観測窓',need:{'g2':2,'w3':1},kinds:['g','g','w','w'],n:5},
+{title:'コイルの予備電源',need:{'e4':1,'m3':1},kinds:['e','e','m','m'],n:5},
+{title:'フロラの温室',need:{'g3':1,'w4':1},kinds:['g','g','w','w'],n:5},
+{title:'修理船の観測窓',need:{'g3':2,'m4':1},kinds:['g','g','m','m'],n:5},
+{title:'空の航路をつなごう',need:{'e3':1,'g4':1},kinds:['e','e','g','g'],n:5},
+{title:'遠いレーダーを直そう',need:{'e3':2,'g3':1},kinds:['e','e','g','g'],n:5},
+{title:'小さな温室の修理',need:{'w4':1,'g3':2},kinds:['w','w','g','g'],n:5},
+{title:'忘れられた発電機',need:{'m4':1,'e4':1},kinds:['m','m','e','e'],n:5},
+{title:'夜空の観測装置',need:{'g4':1,'e3':2},kinds:['g','g','e','e'],n:5},
+{title:'ポッケ星の未来',need:{'e4':1,'g4':1},kinds:['e','e','g','g'],n:5}
 ];
-const names={m:['空き缶','鉄くず','歯車','動力部品'],w:['小枝','板材','木枠','建築部品']};
+// Existing stage-6..15 progress keeps its pre-expansion mission and queue until
+// the next stage. Stage 1–5 and prior saved items remain unchanged.
+const legacyStageCfg={
+ 6:{title:'遠い倉庫の修理',need:{'m3':2,'w3':1},kinds:['m','w'],n:4},
+ 7:{title:'橋の足場をつくろう',need:{'w3':3},kinds:['w','w','m'],n:4},
+ 8:{title:'端末に電気を送ろう',need:{'m3':2,'w3':2},kinds:['m','m','w'],n:4},
+ 9:{title:'古い道具を組み立てよう',need:{'w4':1,'w3':1},kinds:['w','w','m'],n:4},
+ 10:{title:'遠くの信号をひろおう',need:{'m4':1,'w3':2},kinds:['m','m','w'],n:5},
+ 11:{title:'森の作業台をつくろう',need:{'w3':3,'m3':1},kinds:['w','w','m'],n:5},
+ 12:{title:'コイルの予備電源',need:{'m4':1,'m3':1},kinds:['m','m','w'],n:5},
+ 13:{title:'フロラの栽培箱',need:{'w4':1,'w3':2},kinds:['w','w','m'],n:5},
+ 14:{title:'修理船の装甲',need:{'m4':1,'m3':3},kinds:['m','m','w'],n:5},
+ 15:{title:'空の航路をつなごう',need:{'m4':1,'w4':1,'m3':1},kinds:['m','w'],n:5}
+};
+const names={m:['空き缶','鉄くず','歯車','動力部品'],w:['小枝','板材','木枠','建築部品'],e:['切れた導線','回路片','制御基板','エネルギーコア'],g:['ガラス片','窓ガラス','光学レンズ','星見望遠鏡']};
 const key='junktopia-web-v01';
 let state;
-function next(){const kinds=cfg[state.stage].kinds;return {k:kinds[Math.floor(rand()*kinds.length)],l:1};}
-function init(s){state.stage=s;state.seed=(Date.now()>>>0)||0x9e3779b9;state.b=Array(25).fill(null);state.q=[next(),next(),next()];state.done={};state.moves=0;state.score=0;state.tool=1;state.shatter=false;for(let i=0;i<cfg[s].n;i++)spawn();save();}
+function activeCfg(){return state.legacyStage?legacyStageCfg[state.stage]||cfg[state.stage]:cfg[state.stage];}
+function next(){const kinds=activeCfg().kinds;return {k:kinds[Math.floor(rand()*kinds.length)],l:1};}
+function init(s){state.stage=s;state.legacyStage=false;state.contentVersion=2;state.seed=(Date.now()>>>0)||0x9e3779b9;state.b=Array(25).fill(null);state.q=[next(),next(),next()];state.done={};state.moves=0;state.score=0;state.tool=1;state.shatter=false;for(let i=0;i<cfg[s].n;i++)spawn();save();}
 function rand(){let x=state.seed>>>0;x^=x<<13;x^=x>>>17;x^=x<<5;state.seed=x>>>0;return state.seed/4294967296;}
 function spawn(){const empty=state.b.map((v,i)=>v===null?i:-1).filter(i=>i>=0);if(!empty.length)return;state.b[empty[Math.floor(rand()*empty.length)]]=state.q.shift();state.q.push(next());}
 function fresh(){return {stage:1,screen:'home',repaired:{},best:{},sound:true,vibrate:true};}
-function load(){try{const d=JSON.parse(localStorage.getItem(key));if(d&&d.stage>0&&d.stage<cfg.length&&d.b?.length===25&&d.q?.length===3){if(!Number.isInteger(d.seed)||d.seed===0)d.seed=0x9e3779b9;return d;}}catch(e){}const d=fresh();state=d;init(1);return state;}
+function load(){try{const d=JSON.parse(localStorage.getItem(key));if(d&&d.stage>0&&d.stage<cfg.length&&d.b?.length===25&&d.q?.length===3){if(!Number.isInteger(d.seed)||d.seed===0)d.seed=0x9e3779b9;if(!d.contentVersion&&d.stage>=6&&d.stage<=15)d.legacyStage=true;return d;}}catch(e){}const d=fresh();state=d;init(1);return state;}
 function save(){try{localStorage.setItem(key,JSON.stringify(state));}catch(e){}}
 function equal(a,b){return a&&b&&a.k===b.k&&a.l===b.l&&a.l<4}
-function targetsDone(){return Object.entries(cfg[state.stage].need).every(([k,n])=>(state.done[k]||0)>=n);}
+function targetsDone(){return Object.entries(activeCfg().need).every(([k,n])=>(state.done[k]||0)>=n);}
 function canMove(){if(state.tool>0&&state.b.some(Boolean))return true;if(state.b.includes(null))return true;for(let y=0;y<5;y++)for(let x=0;x<5;x++){const i=y*5+x;if(x<4&&equal(state.b[i],state.b[i+1]))return true;if(y<4&&equal(state.b[i],state.b[i+5]))return true;}return false;}
 // Game state is updated immediately and saved before its optional cosmetic animation.
 let turnAnimating=false;
 function move(dir){
  if(turnAnimating || state.screen!=='puzzle' || !['left','right','up','down'].includes(dir))return;
- const outcome=window.JunktopiaCore.transition(state.b,dir,cfg[state.stage].need,state.done);
+ const outcome=window.JunktopiaCore.transition(state.b,dir,activeCfg().need,state.done);
  if(!outcome.changed)return;
  state.b=outcome.board;
  state.done=outcome.done;
@@ -71,7 +91,7 @@ function tone(kind){try{if(state.vibrate&&navigator.vibrate)navigator.vibrate(ki
 function text(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 function item(a){return a?names[a.k][a.l-1]:'—';}
 function planet(){return window.JunktopiaArt.planet(state.repaired||{});}
-function targets(){return Object.entries(cfg[state.stage].need).map(([id,n])=>{const t={k:id[0],l:Number(id[1])},done=state.done[id]||0;return '<span class="mission-target" data-goal="'+id+'">'+window.JunktopiaArt.itemSVG(t)+'<span>'+names[t.k][t.l-1]+'<b>'+done+'/'+n+'</b></span></span>';}).join('');}
+function targets(){return Object.entries(activeCfg().need).map(([id,n])=>{const t={k:id[0],l:Number(id[1])},done=state.done[id]||0;return '<span class="mission-target" data-goal="'+id+'">'+window.JunktopiaArt.itemSVG(t)+'<span>'+names[t.k][t.l-1]+'<b>'+done+'/'+n+'</b></span></span>';}).join('');}
 function ponkoHomePanel(){
  if(state.repaired && state.repaired.robot){
   return '<div class="story-panel">'+window.JunktopiaArt.ponko()+'<p><strong>ポンコ</strong><br>これ、まだ使えるかも！<br>いっしょに星を直そう！</p></div>';
@@ -101,28 +121,46 @@ function restorationGrid(repaired){
 function chapterCard(n){
  if(n<=5)return '';
  if(n<=10)return '<div class="chapter-banner"><strong>第二章：星の外れへ</strong><p>通信が戻ったポッケ星に、新しい修理依頼が届いた。まだ使えるガラクタを探しに行こう。</p></div>';
- return '<div class="chapter-banner"><strong>第三章：空の航路へ</strong><p>ナットの記録を頼りに、古い修理船と仲間たちの居場所を探していこう。</p></div>';
+ if(n<=15)return '<div class="chapter-banner"><strong>第三章：空の航路へ</strong><p>ナットの記録を頼りに、古い修理船と仲間たちの居場所を探していこう。</p></div>';
+ return '<div class="chapter-banner"><strong>第四章：きらめく星の道</strong><p>電気と光学部品を集めて、空の観測装置を復旧しよう。</p></div>';
 }
-function stagePar(stage){return [0,6,10,15,16,18,17,20,24,27,27,26,26,34,35,37][stage]||40;}
+function stagePar(stage){return [0,6,10,15,16,18,17,20,24,27,27,26,26,34,35,37,35,38,42,45,49][stage]||50;}
 function stageStars(stage,moves){const par=stagePar(stage);return moves<=par?3:moves<=Math.ceil(par*1.5)?2:1;}
 function starMarkup(stage,moves){const stars=stageStars(stage,moves);return '<div class="rank-result"><small>REPAIR RANK</small><div class="stars" aria-label="'+stars+'つ星">'+ '★'.repeat(stars)+'<span class="stars-muted">'+ '☆'.repeat(3-stars)+'</span></div><small>目標：'+stagePar(stage)+'手以内で3つ星</small></div>';}
+function catalog(){
+ const groups=[['m','金属の修理部品','錆びた金属を、精密な機械へ。'],
+ ['w','木材と建築','小枝から星の建物へ。'],
+ ['e','電子部品','壊れた配線から、星のエネルギーへ。'],
+ ['g','ガラスと光学','破片を磨き、遠くの星を見る。']];
+ return '<div class="ey">SALVAGE ENCYCLOPEDIA</div><h1>ガラクタ図鑑</h1>'+
+ '<p>同じ素材・同じレベルを2つ合体させると、次の姿へ進化するよ。</p>'+
+ groups.map(([kind,title,desc])=>'<section class="catalog-group"><div class="catalog-heading"><h2>'+text(title)+'</h2><p>'+text(desc)+'</p></div>'+
+ '<div class="catalog-grid">'+names[kind].map((name,i)=>{
+ const item={k:kind,l:i+1};
+ return '<article class="catalog-item catalog-'+kind+'">'+window.JunktopiaArt.itemSVG(item)+
+ '<span class="catalog-level">LEVEL '+(i+1)+'</span><strong>'+text(name)+'</strong>'+
+ (i<3?'<small>同じもの×2で進化</small>':'<small>最高レベル</small>')+'</article>';
+ }).join('')+'</div></section>').join('')+
+ '<button id="home" class="alt">惑星へ戻る</button>';
+}
 function html(s){document.getElementById('app').innerHTML=s;}
 function navHome(){state.screen='home';save();render();}
-function render(overrideScreen){if(document.body?.dataset)document.body.dataset.motionMode=state.motionMode||'auto';const s=overrideScreen||state.screen||'home',n=state.stage,c=cfg[n],rep=restorationPercent(state.repaired);
-if(s==='home'){html('<div class="title-logo">JUNKTOPIA</div><div class="logo-subtitle">ガラクタ惑星</div><p class="intro-line">捨てられたモノから、星をなおそう。</p>'+planet()+ponkoHomePanel()+chapterCard(n)+'<div class="card"><div class="row"><b>ポッケ星</b><b>復興率 '+rep+'%</b></div><div class="meter"><div style="width:'+rep+'%"></div></div>'+restorationGrid(state.repaired)+'<p>STAGE '+n+'　'+c.title+'</p></div><button id="play">パズルをはじめる ▶</button><button class="alt" id="journal">星の記録を見る</button><button class="alt" id="settings">設定・遊び方</button><div class="footer">完全無料・広告なし・V0.7｜演出・難易度・デザイン改良</div>');document.getElementById('play').onclick=()=>{state.screen='puzzle';save();render();};document.getElementById('settings').onclick=()=>{state.screen='settings';render();};document.getElementById('journal').onclick=()=>{state.screen='journal';render();};return;}
-if(s==='puzzle'){html('<div class="row"><button id="pause" class="alt" style="width:auto">‹ 中断</button><span class="ey">STAGE '+n+'</span></div><div class="stage-kicker">REPAIR MISSION　'+String(n).padStart(2,'0')+' / '+(cfg.length-1)+'</div><h2>'+c.title+'</h2><div class="card mission-card"><span class="mission-eyebrow">本日の修復依頼</span><div class="mission-targets">'+targets()+'</div></div><div class="run-stats"><span class="run-stat"><small>RECOVERY POINTS</small><strong>'+state.score+'</strong></span><span class="run-stat"><small>SWIPES</small><strong>'+state.moves+'</strong></span></div><div class="board'+(turnAnimating?' motion-active':'')+'" id="board">'+state.b.map((a,i)=>'<div class="tile '+(a?'filled '+(a.k==='w'?'wood':''):'')+'" data-i="'+i+'">'+(a?window.JunktopiaArt.itemSVG(a)+'<small>Lv.'+a.l+'</small>':'')+'</div>').join('')+'</div><div class="card row"><div><div class="muted">次のガラクタ</div><div class="queue-items">'+state.q.map(a=>'<span class="queue-item">'+window.JunktopiaArt.itemSVG(a)+'</span>').join('')+'</div></div></div><button class="alt" id="tool">'+(state.shatter?'解体するマスをタップ（中止）':'解体ツール ×'+state.tool)+'</button><p class="muted">上下左右にスワイプして同じアイテムを合体！</p>');document.getElementById('pause').onclick=navHome;document.getElementById('tool').onclick=()=>{if(state.tool){state.shatter=!state.shatter;render();}};const b=document.getElementById('board');let start=null;b.onpointerdown=e=>{start={x:e.clientX,y:e.clientY};b.setPointerCapture(e.pointerId)};b.onpointerup=e=>{if(!start)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;start=null;if(Math.hypot(dx,dy)<22){if(state.shatter){const rect=b.getBoundingClientRect(),x=Math.floor((e.clientX-rect.left-7)/(rect.width-14)*5),y=Math.floor((e.clientY-rect.top-7)/(rect.height-14)*5),i=y*5+x;if(i>=0&&i<25&&state.b[i]){state.b[i]=null;state.tool--;state.shatter=false;state.score=Math.max(0,state.score-10);save();render();}}return;}if(state.shatter)return;move(Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up');};return;}
+function render(overrideScreen){if(document.body?.dataset)document.body.dataset.motionMode=state.motionMode||'auto';const s=overrideScreen||state.screen||'home',n=state.stage,c=activeCfg(),rep=restorationPercent(state.repaired);
+if(s==='home'){html('<div class="title-logo">JUNKTOPIA</div><div class="logo-subtitle">ガラクタ惑星</div><p class="intro-line">捨てられたモノから、星をなおそう。</p>'+planet()+ponkoHomePanel()+chapterCard(n)+'<div class="card"><div class="row"><b>ポッケ星</b><b>復興率 '+rep+'%</b></div><div class="meter"><div style="width:'+rep+'%"></div></div>'+restorationGrid(state.repaired)+'<p>STAGE '+n+'　'+c.title+'</p></div><button id="play">パズルをはじめる ▶</button><button class="alt" id="journal">星の記録を見る</button><button class="alt" id="catalog">ガラクタ図鑑（全16種類）</button><button class="alt" id="settings">設定・遊び方</button><div class="footer">完全無料・広告なし・V0.8｜全16種類のガラクタ</div>');document.getElementById('play').onclick=()=>{state.screen='puzzle';save();render();};document.getElementById('settings').onclick=()=>{state.screen='settings';render();};document.getElementById('journal').onclick=()=>{state.screen='journal';render();};document.getElementById('catalog').onclick=()=>{state.screen='catalog';render();};return;}
+if(s==='puzzle'){html('<div class="row"><button id="pause" class="alt" style="width:auto">‹ 中断</button><span class="ey">STAGE '+n+'</span></div><div class="stage-kicker">REPAIR MISSION　'+String(n).padStart(2,'0')+' / '+(cfg.length-1)+'</div><h2>'+c.title+'</h2><div class="card mission-card"><span class="mission-eyebrow">本日の修復依頼</span><div class="mission-targets">'+targets()+'</div></div><div class="run-stats"><span class="run-stat"><small>RECOVERY POINTS</small><strong>'+state.score+'</strong></span><span class="run-stat"><small>SWIPES</small><strong>'+state.moves+'</strong></span></div><div class="board'+(turnAnimating?' motion-active':'')+'" id="board">'+state.b.map((a,i)=>'<div class="tile '+(a?'filled '+({w:'wood',e:'electronic',g:'glass'}[a.k]||''):'')+'" data-i="'+i+'">'+(a?window.JunktopiaArt.itemSVG(a)+'<small>Lv.'+a.l+'</small>':'')+'</div>').join('')+'</div><div class="card row"><div><div class="muted">次のガラクタ</div><div class="queue-items">'+state.q.map(a=>'<span class="queue-item queue-'+a.k+'">'+window.JunktopiaArt.itemSVG(a)+'</span>').join('')+'</div></div></div><button class="alt" id="tool">'+(state.shatter?'解体するマスをタップ（中止）':'解体ツール ×'+state.tool)+'</button><p class="muted">上下左右にスワイプして同じアイテムを合体！</p>');document.getElementById('pause').onclick=navHome;document.getElementById('tool').onclick=()=>{if(state.tool){state.shatter=!state.shatter;render();}};const b=document.getElementById('board');let start=null;b.onpointerdown=e=>{start={x:e.clientX,y:e.clientY};b.setPointerCapture(e.pointerId)};b.onpointerup=e=>{if(!start)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;start=null;if(Math.hypot(dx,dy)<22){if(state.shatter){const rect=b.getBoundingClientRect(),x=Math.floor((e.clientX-rect.left-7)/(rect.width-14)*5),y=Math.floor((e.clientY-rect.top-7)/(rect.height-14)*5),i=y*5+x;if(i>=0&&i<25&&state.b[i]){state.b[i]=null;state.tool--;state.shatter=false;state.score=Math.max(0,state.score-10);save();render();}}return;}if(state.shatter)return;move(Math.abs(dx)>Math.abs(dy)?dx>0?'right':'left':dy>0?'down':'up');};return;}
 if(s==='win'||s==='lose'){const won=s==='win';html('<div class="ey">STAGE '+n+'</div><h1>'+(won?'修理完了！':'作業場がいっぱい！')+'</h1>'+planet()+'<div class="card">'+(won?starMarkup(n,state.moves):'<div class="stars">☆</div>')+'<div class="row"><span>スコア '+state.score+'</span><span>手数 '+state.moves+'</span></div></div><button id="go">'+(won?'惑星へ戻る ▶':'もう一度挑戦')+'</button><button class="alt" id="retry">このステージをやり直す</button>');document.getElementById('go').onclick=()=>{if(!won){init(n);state.screen='puzzle';save();render();return;}if(n===3){state.screen='repair';}else if(n===cfg.length-1){state.screen='end';}else{init(n+1);state.screen='home';}save();render();};document.getElementById('retry').onclick=()=>{init(n);state.screen='puzzle';save();render();};return;}
 if(s==='repair'){html('<h1>復興の分かれ道</h1><p>ポンコ「どちらを先になおそう？」</p>'+planet()+'<div class="choices"><button id="lamp">💡 古い街灯をなおす<small>惑星の夜に暖かな光を灯す</small></button><button id="flower">🌼 枯れた花壇をなおす<small>小さな花を咲かせる</small></button></div>');['lamp','flower'].forEach(k=>document.getElementById(k).onclick=()=>{state.repaired[k]=true;init(4);state.screen='home';save();render();});return;}
 if(s==='end'){
  const remaining=n<cfg.length-1;
  html('<div class="ey">'+(remaining?'NEW CHAPTER':'PROTOTYPE COMPLETE')+'</div><h1>'+(remaining?'まだ続く、星の物語。':'ポッケ星の外まで、明かりを。')+'</h1>'+planet()+
- '<p>'+(remaining?'通信が戻った星に、新たな修理依頼が届いた。第二章へ進もう！':(cfg.length-1)+'ステージ達成！ 続きの物語も楽しみに。')+'</p>'+
- (remaining?'<button id="continue">'+(n>=10?'第三章':'第二章')+'へ進む ▶</button>':'')+
+ '<p>'+(remaining?'星から新しい修理依頼が届いた。次の章へ進もう！':(cfg.length-1)+'ステージ達成！ 続きの物語も楽しみに。')+'</p>'+
+ (remaining?'<button id="continue">'+(n>=15?'第四章':n>=10?'第三章':'第二章')+'へ進む ▶</button>':'')+
  '<button id="retry">ステージ'+n+'をもう一度</button><button class="alt" id="home">惑星へ戻る</button>');
  if(remaining)document.getElementById('continue').onclick=()=>{init(n+1);state.screen='home';save();render();};
  document.getElementById('retry').onclick=()=>{init(n);state.screen='puzzle';save();render();};
  document.getElementById('home').onclick=navHome;return;
 }
+if(s==='catalog'){html(catalog());document.getElementById('home').onclick=navHome;return;}
 if(s==='journal'){
  const logs=window.JunktopiaLore.available(state.repaired,state.stage,state.best),opened=logs.filter(e=>e.unlocked).length;
  html('<div class="ey">POCKE PLANET ARCHIVE</div><h1>星の記録</h1><p>修理のたびに、忘れられた星の物語が見つかる。</p><div class="card"><b>発見した記録　'+opened+' / '+logs.length+'</b></div>'+
