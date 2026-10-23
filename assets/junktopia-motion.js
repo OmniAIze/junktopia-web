@@ -42,7 +42,7 @@ function ghost(board,layer,tiles,track){
   if(!tiles[track.from]||!tiles[track.to])return null;
   const from=relativeRect(tiles[track.from],board),to=relativeRect(tiles[track.to],board);
   const el=document.createElement('div');
-  el.className='motion-ghost '+(track.tile.k==='w'?'motion-wood':'motion-metal');
+  el.className='motion-ghost '+({w:'motion-wood',e:'motion-electronic',g:'motion-glass'}[track.tile.k]||'motion-metal');
   el.dataset.from=String(track.from);el.dataset.to=String(track.to);
   el.style.left=from.x+'px';el.style.top=from.y+'px';
   el.style.width=from.w+'px';el.style.height=from.h+'px';
